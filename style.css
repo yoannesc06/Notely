@@ -1,0 +1,623 @@
+/* =========================
+   RESET / BASE
+========================= */
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* =========================
+   BACKGROUND APP
+========================= */
+
+/* mode clair */
+body.editor-page {
+  background: #ffffff;
+}
+
+/* mode sombre */
+body.dark.editor-page {
+  background: #111111;
+}
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 24px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: none;
+  background: #e6e6e6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.theme-toggle:hover {
+  background: #d0d0d0;
+}
+
+.theme-toggle i {
+  width: 18px;
+  height: 18px;
+}
+
+/* dark style */
+body.dark .theme-toggle {
+  background: #2a2a2a;
+  color: #ffffff;
+}
+
+body.dark .theme-toggle:hover {
+  background: #3a3a3a;
+}
+
+/* =========================
+   LOADING SCREEN
+========================= */
+
+#loadingScreen {
+  position: fixed;
+  inset: 0;
+  background: #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.logo-loading {
+  width: 500px;
+  animation: logoPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes logoPulse {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.9);
+    opacity: 0.6;
+  }
+}
+/* =========================
+   TOOLBAR
+========================= */
+
+.editor-header {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+.tools {
+  background: #ffffff;
+  padding: 8px 14px;
+  border-radius: 20px;
+  display: flex;
+  gap: 6px;
+}
+
+/* dark toolbar */
+body.dark .tools {
+  background: #2a2a2a;
+}
+
+.tools button {
+  border: none;
+  background: transparent;
+  padding: 6px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+
+  transition:
+    background 0.18s ease,
+    transform 0.08s ease;
+}
+
+.tools button:hover {
+  background: #cfd8ff;
+}
+
+body.dark .tools button:hover {
+  background: #727272;
+}
+
+.tool-btn i {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2;
+}
+
+/* bouton actif */
+.tool-btn.active {
+  background: #cfd8ff;
+  box-shadow: 0 0 0 2px #7b8cff inset;
+}
+
+/* =========================
+   COLOR PICKER
+========================= */
+
+.color-picker {
+  position: relative;
+}
+
+.palette {
+  display: none;
+  position: absolute;
+  top: 34px;
+  left: 0;
+  background: #ffffff;
+  padding: 6px;
+  border-radius: 8px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+  gap: 6px;
+}
+
+.palette.open {
+  display: flex;
+}
+
+body.dark .palette {
+  background: #2a2a2a;
+}
+
+.swatch {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 1px solid #999;
+}
+
+/* =========================
+   EDITOR ZONE
+========================= */
+
+.editor-main {
+  display: flex;
+  justify-content: center;
+  padding: 30px 0 60px;
+}
+
+.pages {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* page papier */
+.page {
+  width: 800px;
+  min-height: 1000px;
+  background: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 10px 25px rgba(150, 150, 150, 0.35);
+  padding: 60px;
+  position: relative;
+}
+
+/* dark paper */
+body.dark .page {
+  background: #2a2a2a;
+  color: #eee;
+  box-shadow: none;
+}
+
+.page-content {
+  outline: none;
+  min-height: 900px;
+}
+
+/* liens */
+.page-content a {
+  cursor: pointer;
+  color: #3366ff;
+}
+
+body.dark .page-content a {
+  color: #7b8cff;
+}
+
+/* =========================
+   FONT SIZE SELECT
+========================= */
+
+.font-size {
+  border: none;
+  background: transparent;
+  padding: 4px 6px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.font-size:hover {
+  background: #d0d0d0;
+}
+
+body.dark .font-size:hover {
+  background: #3a3a3a;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.notely-footer {
+  text-align: center;
+  padding: 30px 0;
+  font-size: 12px;
+  color: #888;
+  margin-top: auto;
+}
+
+body.dark .notely-footer {
+  color: #666;
+}
+
+/* =========================
+   PRINT
+========================= */
+
+@media print {
+  body {
+    background: white !important;
+  }
+
+  .editor-header,
+  .tools,
+  #loadingScreen,
+  .notely-footer {
+    display: none !important;
+  }
+
+  .editor-main {
+    padding: 0 !important;
+  }
+
+  .page {
+    box-shadow: none !important;
+    margin: 0 auto !important;
+    page-break-after: always;
+  }
+}
+
+/* =========================
+   SNAKE EASTER EGG
+========================= */
+
+#snakeOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(44, 44, 44, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+}
+
+.snake-container {
+  position: relative;
+  background: #84ff00;
+  border-radius: 12px;
+}
+
+.snake-countdown {
+  position: absolute;
+  font-size: 80px;
+  color: #7b8cff;
+  font-weight: 700;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.snake-score {
+  position: absolute;
+  top: -32px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #7b8cff;
+  font-weight: 700;
+  font-size: 18px;
+}
+/* =========================
+   BURGER MOBILE
+========================= */
+.tools-burger {
+  display: none;
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+  background: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1200;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.tools-burger i {
+  width: 20px;
+  height: 20px;
+}
+
+body.dark .tools-burger {
+  background: #2a2a2a;
+  color: #fff;
+}
+/* CONTACT */
+/* =========================
+   CONTACT PAGE
+========================= */
+
+.contact-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 80px 20px;
+  min-height: 80vh;
+}
+
+.contact-card {
+  width: 100%;
+  max-width: 500px;
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 18px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+  transition: 0.3s ease;
+}
+
+body.dark .contact-card {
+  background: #2a2a2a;
+}
+
+.contact-card h1 {
+  margin: 0 0 10px;
+}
+
+.contact-sub {
+  margin-bottom: 30px;
+  color: #777;
+}
+
+body.dark .contact-sub {
+  color: #aaa;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+.input-group input,
+.input-group textarea {
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+  transition: 0.2s ease;
+}
+
+.input-group input:focus,
+.input-group textarea:focus {
+  border-color: #7b8cff;
+  box-shadow: 0 0 0 2px rgba(123, 140, 255, 0.2);
+}
+
+body.dark .input-group input,
+body.dark .input-group textarea {
+  background: #1e1e1e;
+  border: 1px solid #444;
+  color: white;
+}
+
+.send-btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  background: #7b8cff;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.send-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(123, 140, 255, 0.4);
+}
+
+#formStatus {
+  margin-top: 15px;
+  font-size: 14px;
+  text-align: center;
+}
+/* =========================
+   MOBILE / TABLET RESPONSIVE
+========================= */
+
+@media (max-width: 1024px) {
+  /* PAGE */
+  .page {
+    width: 90vw;
+    max-width: 760px;
+    padding: 40px 30px;
+    margin: 0 auto;
+    min-height: calc(100vh - 160px);
+  }
+
+  .editor-main {
+    padding: 20px 0 40px;
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+  .logo {
+    position: static;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .logo img {
+    height: 28px;
+  }
+  /* burger visible */
+  .tools-burger {
+    display: flex;
+  }
+
+  /* header réduit */
+  .editor-header {
+    padding: 8px 0;
+  }
+
+  /* MENU TOOLS FLOAT */
+  .tools {
+    position: fixed;
+    top: 70px;
+    left: 16px;
+
+    flex-direction: column;
+    gap: 10px;
+
+    padding: 14px;
+    border-radius: 16px;
+
+    background: #ffffff;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+
+    opacity: 0;
+    transform: translateY(-10px) scale(0.96);
+    pointer-events: none;
+
+    transition: all 0.22s ease;
+    z-index: 3000;
+  }
+
+  body.dark .tools {
+    background: #2a2a2a;
+  }
+
+  .tools.open {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+  }
+
+  /* boutons plus gros tactile */
+  .tool-btn {
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  .tool-btn i {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* PAGE MOBILE */
+  .page {
+    width: 80vw;
+    margin-top: 30px;
+    max-width: none;
+    padding: 26px 18px;
+    min-height: calc(100vh - 140px);
+    border-radius: 10px;
+  }
+
+  .page-content {
+    min-height: auto;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* DARK */
+  body.dark .page {
+    background: #2a2a2a;
+  }
+
+  /* toggle position */
+  .theme-toggle {
+    top: 14px;
+    right: 14px;
+    width: 36px;
+    height: 36px;
+  }
+
+  /* burger position */
+  .tools-burger {
+    top: 14px;
+    left: 14px;
+    width: 36px;
+    height: 36px;
+  }
+}
+
+/* =========================
+   SMALL PHONES
+========================= */
+
+@media (max-width: 480px) {
+  .page {
+    width: 96vw;
+    padding: 22px 14px;
+  }
+
+  .page-content {
+    font-size: 15px;
+  }
+
+  .tools {
+    left: 10px;
+    top: 64px;
+  }
+
+  .tools-burger {
+    left: 10px;
+  }
+
+  .theme-toggle {
+    right: 10px;
+  }
+}
+
+/* =========================
+   LARGE SCREENS
+========================= */
+
+@media (min-width: 1400px) {
+  .page {
+    width: 900px;
+  }
+}

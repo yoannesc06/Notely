@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notely - Bloc note en ligne</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/png" href="images/favicon.png" />
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  </head>
+
+  <body class="editor-page">
+    <!-- loading -->
+    <div id="loadingScreen">
+      <img src="images/logogif.gif" class="logo-loading" />
+    </div>
+
+    <!-- burger mobile -->
+    <button class="tools-burger" id="burgerBtn">
+      <i data-lucide="menu"></i>
+    </button>
+
+    <!-- dark toggle -->
+    <button class="theme-toggle" onclick="toggleDarkMode()">
+      <i data-lucide="moon"></i>
+    </button>
+
+    <header class="editor-header">
+      <div class="tools" id="toolsBar">
+        <button class="tool-btn" onmousedown="toggleCmd(this, 'bold', event)">
+          <i data-lucide="bold"></i>
+        </button>
+
+        <button class="tool-btn" onmousedown="toggleCmd(this, 'italic', event)">
+          <i data-lucide="italic"></i>
+        </button>
+
+        <button
+          class="tool-btn"
+          onmousedown="toggleCmd(this, 'underline', event)"
+        >
+          <i data-lucide="underline"></i>
+        </button>
+
+        <button
+          class="tool-btn"
+          onmousedown="toggleCmd(this, 'strikeThrough', event)"
+        >
+          <i data-lucide="strikethrough"></i>
+        </button>
+
+        <button
+          class="tool-btn"
+          onmousedown="cmd('insertUnorderedList', event)"
+        >
+          <i data-lucide="list"></i>
+        </button>
+
+        <button class="tool-btn" onmousedown="cmd('insertOrderedList', event)">
+          <i data-lucide="list-ordered"></i>
+        </button>
+
+        <button class="tool-btn" onmousedown="addLink(event)">
+          <i data-lucide="link"></i>
+        </button>
+
+        <!-- highlight -->
+        <div class="color-picker">
+          <button class="tool-btn" onmousedown="togglePalette(event)">
+            <i data-lucide="highlighter"></i>
+          </button>
+
+          <div class="palette" id="palette">
+            <div
+              class="swatch"
+              style="background: yellow"
+              onmousedown="applyHighlight('yellow', event)"
+            ></div>
+            <div
+              class="swatch"
+              style="background: lightgreen"
+              onmousedown="applyHighlight('lightgreen', event)"
+            ></div>
+            <div
+              class="swatch"
+              style="background: lightblue"
+              onmousedown="applyHighlight('lightblue', event)"
+            ></div>
+            <div
+              class="swatch"
+              style="background: pink"
+              onmousedown="applyHighlight('pink', event)"
+            ></div>
+            <div
+              class="swatch"
+              style="background: orange"
+              onmousedown="applyHighlight('orange', event)"
+            ></div>
+          </div>
+        </div>
+
+        <button class="tool-btn" onclick="downloadPDF()">
+          <i data-lucide="file-down"></i>
+        </button>
+
+        <button class="tool-btn" onclick="window.print()">
+          <i data-lucide="printer"></i>
+        </button>
+      </div>
+    </header>
+
+    <main class="editor-main">
+      <div id="pages" class="pages"></div>
+    </main>
+
+    <footer class="notely-footer">
+      © 2026 Notely — Tous droits réservés <a href="index.html">Accueil</a>
+      <a href="contact.html"> Contact</a>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+      lucide.createIcons();
+    </script>
+  </body>
+</html>

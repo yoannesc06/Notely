@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact — Notely</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/png" href="images/favicon.png" />
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  </head>
+
+  <body class="editor-page">
+    <!-- Dark toggle -->
+    <button class="theme-toggle" onclick="toggleDarkMode()">
+      <i data-lucide="moon"></i>
+    </button>
+
+    <!-- Contact section -->
+    <main class="contact-container">
+      <div class="contact-card">
+        <h1>Contact</h1>
+        <p class="contact-sub">Une question ou une suggestion ?</p>
+
+        <form id="contactForm">
+          <div class="input-group">
+            <label>Nom</label>
+            <input type="text" name="name" required />
+          </div>
+
+          <div class="input-group">
+            <label>Email</label>
+            <input type="email" name="email" required />
+          </div>
+
+          <div class="input-group">
+            <label>Message</label>
+            <textarea name="message" rows="5" required></textarea>
+          </div>
+
+          <button type="submit" class="send-btn">Envoyer</button>
+
+          <p id="formStatus"></p>
+        </form>
+      </div>
+    </main>
+
+    <footer class="notely-footer">
+      © 2026 Notely — Tous droits réservés
+      <a href="index.html">Accueil</a>
+      <a href="contact.html">Contact</a>
+    </footer>
+
+    <script src="script.js"></script>
+
+    <script>
+      lucide.createIcons();
+
+      // CONFIG EMAILJS
+      (function () {
+        emailjs.init("JaH7Y1_ruJ4--f1lQ");
+      })();
+
+      const form = document.getElementById("contactForm");
+      const status = document.getElementById("formStatus");
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        emailjs
+          .sendForm("service_jecdx4i", "template_offw61c", this)
+          .then(() => {
+            status.innerText = "Message envoyé ✅";
+            status.style.color = "green";
+            form.reset();
+          })
+          .catch(() => {
+            status.innerText = "Erreur d'envoi ❌";
+            status.style.color = "red";
+          });
+      });
+    </script>
+  </body>
+</html>
